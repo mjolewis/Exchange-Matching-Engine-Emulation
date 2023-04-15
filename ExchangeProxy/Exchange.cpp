@@ -4,7 +4,7 @@
 #define EXCHANGEMATCHINGENGINE_USERPROXYSERVER_CPP
 
 #include <iostream>
-#include "UserProxyServer.hpp"
+#include "UserProxy/UserProxyServer.hpp"
 
 int main()
 {
