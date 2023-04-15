@@ -44,22 +44,22 @@ bool UserProxyEngine::validateRequest(int request)
     switch (request)
     {
         case 1:
-            std::cout << "You're goal is to make money. Analyze the bids and offers." << std::endl;
+            UserProxyEngine::printHelp();
             break;
         case 2:
-            std::cout << "Stats placeholder" << std::endl;
+            UserProxyEngine::printMarketStats();
             break;
         case 3:
-            std::cout << "Make an offer" << std::endl;
+            UserProxyEngine::submitOffer();
             break;
         case 4:
-            std::cout << "Make a bid" << std::endl;
+            UserProxyEngine::submitBid();
             break;
         case 5:
-            std::cout << "Your wallet is empty" << std::endl;
+            UserProxyEngine::printWallet();
             break;
         case 6:
-            std::cout << "Going to next timeframe" << std::endl;
+            UserProxyEngine::goToNextTimeframe();
             break;
         default:
             isValidRequest = false;
@@ -67,6 +67,36 @@ bool UserProxyEngine::validateRequest(int request)
     }
 
     return isValidRequest;
+}
+
+void UserProxyEngine::printHelp()
+{
+    std::cout << "You're goal is to make money. Analyze the bids and offers." << std::endl;
+}
+
+void UserProxyEngine::printMarketStats()
+{
+    std::cout << "Stats placeholder" << std::endl;
+}
+
+void UserProxyEngine::submitOffer()
+{
+    std::cout << "Make an offer" << std::endl;
+}
+
+void UserProxyEngine::submitBid()
+{
+    std::cout << "Make a bid" << std::endl;
+}
+
+void UserProxyEngine::printWallet()
+{
+    std::cout << "Your wallet is empty" << std::endl;
+}
+
+void UserProxyEngine::goToNextTimeframe()
+{
+    std::cout << "Going to next timeframe" << std::endl;
 }
 
 void UserProxyEngine::onSubmitRequest(int request)

@@ -17,6 +17,12 @@ private:
     static void initializeExchange();
     static void printMenu();
     static int listenForRequest();
+    static void printHelp();
+    static void printMarketStats();
+    static void submitOffer();
+    static void submitBid();
+    static void printWallet();
+    static void goToNextTimeframe();
     static bool validateRequest(int request);
     static void onSubmitRequest(int request);
 };
