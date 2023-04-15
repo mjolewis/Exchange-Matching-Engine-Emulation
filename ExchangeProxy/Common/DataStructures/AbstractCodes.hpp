@@ -11,11 +11,10 @@
 class AbstractCodes
 {
 private:
-    int id;
+    int id{};
     std::string desc;
 
 protected:
-    AbstractCodes() = default;
     AbstractCodes(int id, std::string desc)
     {
         this->id = id;
@@ -23,6 +22,8 @@ protected:
     }
 
 public:
+    virtual ~AbstractCodes() = default;
+
     virtual std::string getDesc() const {return this->desc;}
 
     virtual constexpr explicit operator int() const {return id;}
