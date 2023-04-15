@@ -13,14 +13,10 @@ UserProxyEngine::UserProxyEngine()
 
 void UserProxyEngine::initializeExchange()
 {
-    int request = -1;
-    while(request < 0 || request > 6)
-    {
-        printMenu();
-        request = listenForRequest();
-        validateRequest(request);
-    }
-    onSubmitRequest(request);
+    printMenu();
+    int request = listenForRequest();
+    bool isValidRequest = validateRequest(request);
+    if (isValidRequest) onSubmitRequest(request);
 }
 
 void UserProxyEngine::printMenu()
@@ -42,8 +38,9 @@ int UserProxyEngine::listenForRequest()
     return request;
 }
 
-int UserProxyEngine::validateRequest(int request)
+bool UserProxyEngine::validateRequest(int request)
 {
+    bool isValidRequest = true;
     switch (request)
     {
         case 1:
@@ -65,10 +62,11 @@ int UserProxyEngine::validateRequest(int request)
             std::cout << "Going to next timeframe" << std::endl;
             break;
         default:
+            isValidRequest = false;
             std::cout << "Invalid request" << std::endl;
     }
 
-    return request;
+    return isValidRequest;
 }
 
 void UserProxyEngine::onSubmitRequest(int request)
