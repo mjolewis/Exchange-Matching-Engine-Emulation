@@ -13,11 +13,17 @@ UserProxyEngine::UserProxyEngine()
 
 void UserProxyEngine::initializeExchange()
 {
-    int request = listenForRequest();
+    int request = -1;
+    while(request < 0 || request > 6)
+    {
+        printMenu();
+        request = listenForRequest();
+        validateRequest(request);
+    }
     onSubmitRequest(request);
 }
 
-int UserProxyEngine::listenForRequest()
+void UserProxyEngine::printMenu()
 {
     const std::vector<AbstractCodes>* options = ExchangeOptions::getAllOptions();
     std::cout << "============\n\n" << std::endl;
@@ -26,11 +32,18 @@ int UserProxyEngine::listenForRequest()
         std::cout << option.getDesc() << std::endl;
     }
     std::cout << "============" << std::endl;
+}
 
+int UserProxyEngine::listenForRequest()
+{
     int request;
     std::cin >> request;
     std::cout << "You selected " << request << std::endl;
+    return request;
+}
 
+int UserProxyEngine::validateRequest(int request)
+{
     switch (request)
     {
         case 1:
