@@ -10,7 +10,7 @@ int main()
 {
     while (true)
     {
-        auto* server = new UserProxyServer;
+        new UserProxyServer;
     }
     return 0;
 }

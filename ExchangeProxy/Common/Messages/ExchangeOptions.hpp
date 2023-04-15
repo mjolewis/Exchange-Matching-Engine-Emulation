@@ -13,9 +13,7 @@
 class ExchangeOptions : public AbstractCodes
 {
 private:
-    ExchangeOptions() = default;
     ExchangeOptions(int id, std::string desc) : AbstractCodes(id, std::move(desc)) {}
-    ~ExchangeOptions() = default;
 
 public:
 
@@ -31,7 +29,7 @@ public:
 
     // Functions
     static const std::vector<AbstractCodes>* getAllOptions();
-    static const AbstractCodes getCodesById(int id);
+    static AbstractCodes getCodesById(int id);
 };
 
 // Enum definitions
@@ -63,7 +61,7 @@ const std::vector<AbstractCodes> *ExchangeOptions::getAllOptions()
     return allOptions;
 }
 
-const AbstractCodes ExchangeOptions::getCodesById(int id)
+AbstractCodes ExchangeOptions::getCodesById(int id)
 {
     return CODES_BY_ID.at(id);
 }
