@@ -17,7 +17,7 @@ private:
     static void initializeExchange();
     static void printMenu();
     static int listenForRequest();
-    static int validateRequest(int request);
+    static bool validateRequest(int request);
     static void onSubmitRequest(int request);
 };
 

@@ -11,7 +11,6 @@ int main()
     while (true)
     {
         auto* server = new UserProxyServer;
-//        std::cout << server << std::endl;
     }
     return 0;
 }
