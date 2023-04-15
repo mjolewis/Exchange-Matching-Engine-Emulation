@@ -4,7 +4,7 @@
 
 #include "iostream"
 #include "UserProxyEngine.hpp"
-#include "ExchangeOptions.hpp"
+#include "../Common/Messages/ExchangeOptions.hpp"
 
 UserProxyEngine::UserProxyEngine()
 {
