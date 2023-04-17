@@ -22,6 +22,8 @@ protected:
     }
 
 public:
+    AbstractCodes() = default;
+
     virtual ~AbstractCodes() = default;
 
     virtual std::string getDesc() const {return this->desc;}
