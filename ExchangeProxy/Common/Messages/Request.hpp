@@ -29,21 +29,9 @@ struct RequestData
  */
 class Request
 {
-public:
-    Request();
-    virtual ~Request();
-
-public:
-
-    // Accessors
-    virtual std::string getId();
-    virtual double getPrice();
-    virtual double getQuantity();
-    virtual Side getSide();
-    virtual std::string getSymbol();
-    virtual std::string getTimestamp();
-
-    // Mutators for replace requests
+private:
+    Request(const Request&);
+    Request& operator=(const Request&);
 
 
 protected:
@@ -51,9 +39,21 @@ protected:
     std::map<long, Request> openOrdersById;
     std::map<long, Request> closedOrdersById;
 
-private:
-    Request(const Request&);
-    Request& operator=(const Request&);
+public:
+    Request();
+    virtual ~Request();
+
+    // Accessors
+    virtual std::string getId();
+    virtual double getPrice();
+    virtual double getQuantity();
+    virtual const Side& getSide();
+    virtual std::string getSymbol();
+    virtual std::string getTimestamp();
+    virtual const std::map<long, Request>& getOpenOrdersById();
+    virtual const std::map<long, Request>& getClosedOrdersById();
+
+    // Mutators for replace requests
 };
 
 /**

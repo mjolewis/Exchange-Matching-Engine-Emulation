@@ -11,7 +11,7 @@
 /**
  * Encapsulate the necessary data to represent the side of an order.
  */
-class Side : AbstractCodes
+class Side : public AbstractCodes
 {
 private:
     Side(int id, std::string desc) : AbstractCodes(id, std::move(desc)) {}

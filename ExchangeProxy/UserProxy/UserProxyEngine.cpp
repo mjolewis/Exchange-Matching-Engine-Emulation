@@ -8,15 +8,6 @@
 
 UserProxyEngine::UserProxyEngine()
 {
-    initializeExchange();
-}
-
-void UserProxyEngine::initializeExchange()
-{
-    printMenu();
-    int request = listenForRequest();
-    bool isValidRequest = validateRequest(request);
-    if (isValidRequest) onSubmitRequest(request);
 }
 
 void UserProxyEngine::printMenu()

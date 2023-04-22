@@ -4,14 +4,14 @@
 #define EXCHANGEMATCHINGENGINE_USERPROXYSERVER_CPP
 
 #include <iostream>
-#include "UserProxy/UserProxyServer.hpp"
+#include "Exchange/ExchangeServer.hpp"
 
 int main()
 {
-    while (true)
-    {
-        new UserProxyServer;
-    }
+    // Open the Exchange
+    std::cout << "*** Exchange is OPEN ***\n\n" << std::endl;
+    ExchangeServer NYSE;
+    NYSE.initializeExchange();
     return 0;
 }
 

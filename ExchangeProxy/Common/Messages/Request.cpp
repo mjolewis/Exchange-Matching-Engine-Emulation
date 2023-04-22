@@ -30,7 +30,7 @@ double Request::getQuantity()
     return Request::requestData->quantity;
 }
 
-Side Request::getSide()
+const Side& Request::getSide()
 {
     return Request::requestData->side;
 }
@@ -49,6 +49,16 @@ std::string Request::getTimestamp()
 //    stream << std::chrono::hh_mm_ss<requestData->timestamp>()>
 //    stream << std::put_time(&Request::requestData->timestamp, "%F %T EST");
     return stream.str();
+}
+
+const std::map<long, Request>& Request::getOpenOrdersById()
+{
+    return openOrdersById;
+}
+
+const std::map<long, Request>& Request::getClosedOrdersById()
+{
+    return closedOrdersById;
 }
 
 //*** AlgoRequest Implementation ***//
