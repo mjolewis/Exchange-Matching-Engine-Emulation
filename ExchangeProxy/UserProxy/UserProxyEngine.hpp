@@ -14,7 +14,6 @@ public:
     UserProxyEngine();
 
 private:
-    static void initializeExchange();
     static void printMenu();
     static int listenForRequest();
     static void printHelp();
