@@ -5,15 +5,23 @@
 #ifndef EXCHANGEMATCHINGENGINE_USERPROXYENGINE_HPP
 #define EXCHANGEMATCHINGENGINE_USERPROXYENGINE_HPP
 
+#include <string>
+#include <vector>
+
+#include "../Common/Servers/Server.hpp"
 
 class UserProxyEngine
 {
-public:
-    // Default constructor opens the exchange and launches the matching engine. There is heap allocation
-    // to accommodate variable number of coins due to new Initial Coin Offerings
-    UserProxyEngine();
-
 private:
+    std::vector<std::string> orderBook;
+    Server* server;
+    bool exchangeOpen;
+
+    // Avoids unintentional or intentional copies and clones of the Exchange
+    UserProxyEngine(const UserProxyEngine&);
+    UserProxyEngine& operator=(const UserProxyEngine&);
+
+    void startEngine() const;
     static void printMenu();
     static int listenForRequest();
     static void printHelp();
@@ -24,6 +32,10 @@ private:
     static void goToNextTimeframe();
     static bool validateRequest(int request);
     static void onSubmitRequest(int request);
+
+public:
+    UserProxyEngine(std::vector<std::string>& orderBook, Server* server);
+    ~UserProxyEngine() = default;
 };
 
 

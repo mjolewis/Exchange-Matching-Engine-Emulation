@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+
 #include "ExchangeServer.hpp"
 #include "ExchangeEngine.hpp"
 
@@ -11,7 +12,7 @@ void ExchangeServer::initializeExchange()
 {
     loadOrderBook();
     printOrderBook();
-    ExchangeEngine engine{this, this->orderBook};
+    ExchangeEngine engine{this->orderBook, this};
 }
 
 // Will eventually load GoodTill orders. For now, simply loads orders from a csv

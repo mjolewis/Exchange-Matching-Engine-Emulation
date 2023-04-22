@@ -2,12 +2,27 @@
 // Created by Michael Lewis on 4/12/23.
 //
 
-#include "iostream"
+#include <iostream>
+#include <vector>
+
 #include "UserProxyEngine.hpp"
 #include "../Common/Messages/ExchangeOptions.hpp"
 
-UserProxyEngine::UserProxyEngine()
+UserProxyEngine::UserProxyEngine(std::vector<std::string>& orderBook, Server* server)
+: orderBook(orderBook), server(server)
 {
+    this->exchangeOpen = true;
+    startEngine();
+}
+
+void UserProxyEngine::startEngine() const
+{
+    while (this->exchangeOpen)
+    {
+        printMenu();
+        int request = listenForRequest();
+        validateRequest(request);
+    }
 }
 
 void UserProxyEngine::printMenu()

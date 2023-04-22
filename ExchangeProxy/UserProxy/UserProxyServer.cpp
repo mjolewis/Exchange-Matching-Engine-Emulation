@@ -3,19 +3,21 @@
 //
 
 #include "UserProxyServer.hpp"
+#include "UserProxyEngine.hpp"
 
-UserProxyServer::UserProxyServer()
+void UserProxyServer::initializeExchange()
 {
-    loadOrderData();
-    createEngine();
+    loadOrderBook();
+    printOrderBook();
+    UserProxyEngine engine{this->orderBook, this};
 }
 
-void UserProxyServer::loadOrderData()
+void UserProxyServer::loadOrderBook()
 {
 
 }
 
-UserProxyEngine* UserProxyServer::createEngine()
+void UserProxyServer::printOrderBook()
 {
-   return new UserProxyEngine;
+
 }
