@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include "ExchangeServer.hpp"
+#include "../Common/Servers/Server.hpp"
 
 /**
  * This class encapsulates a naive version of an exchange.
@@ -26,8 +26,8 @@
 class ExchangeEngine
 {
 private:
-    ExchangeServer* server;
     std::vector<std::string> orderBook;
+    Server* server;
     bool exchangeOpen;
 
     // Avoids unintentional or intentional copies and clones of the Engine
@@ -38,7 +38,7 @@ private:
     void stopEngine();
 
 public:
-    ExchangeEngine(ExchangeServer* server, std::vector<std::string>& orderBook);
+    ExchangeEngine(std::vector<std::string>& orderBook, Server* server);
     ~ExchangeEngine() = default;
 };
 

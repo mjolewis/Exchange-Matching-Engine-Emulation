@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+#include "../Common/Servers/Server.hpp"
+
 /**
  * This class encapsulates a naive server in which the ExchangeEngine will run.
  * This protocol of the server will eventually expand to include the following:
@@ -21,7 +23,7 @@
  * Enabling resiliency by registering heartbeats for other apps in the system. Including heartsbeats of
  * other ExchangeServers that run in passive mode in the event a failover is required.
  */
-class ExchangeServer
+class ExchangeServer : public Server
 {
 private:
     std::vector<std::string> orderBook;
@@ -30,14 +32,14 @@ private:
     ExchangeServer(const ExchangeServer&);
     ExchangeServer& operator=(const ExchangeServer&);
 
-    void loadOrderBook();
-    void printOrderBook();
+    void loadOrderBook() override;
+    void printOrderBook() override;
 
 public:
     ExchangeServer() = default;
     ~ExchangeServer() = default;
 
-    void initializeExchange();
+    void initializeExchange() override;
 };
 
 #endif //EXCHANGEMATCHINGENGINE_EXCHANGESERVER_HPP
