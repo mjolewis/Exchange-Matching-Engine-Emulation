@@ -14,12 +14,12 @@
 // Encapsulate all the necessary data for a request for intuitive structuring of the parameters
 struct RequestData
 {
+    std::chrono::steady_clock::time_point timestamp;
     std::string id;
     double price;
     double quantity;
     Side side;
     std::string symbol;
-    std::chrono::steady_clock::time_point timestamp;
 };
 
 /**
@@ -30,9 +30,9 @@ struct RequestData
 class Request
 {
 private:
+    // Prevent unintentional or intentional copies and clones of this request
     Request(const Request&);
     Request& operator=(const Request&);
-
 
 protected:
     RequestData* requestData;
@@ -44,12 +44,12 @@ public:
     virtual ~Request();
 
     // Accessors
+    virtual std::string getTimestamp();
     virtual std::string getId();
     virtual double getPrice();
     virtual double getQuantity();
     virtual const Side& getSide();
     virtual std::string getSymbol();
-    virtual std::string getTimestamp();
     virtual const std::map<long, Request>& getOpenOrdersById();
     virtual const std::map<long, Request>& getClosedOrdersById();
 
@@ -57,19 +57,35 @@ public:
 };
 
 /**
- * Provides an interface for algo orders. This will be used for the demo purposes when the orders are read in
- * from the historical CSV file.
+ * Provides an interface for algo orders. This will be used for demoing asynchronous requests generated
+ * by multiple trader threads to simulate algorithmic flow.
  */
 class AlgoRequest : public Request
 {
+private:
+    // Prevent unintentional or intentional copies and clones of this request
+    AlgoRequest(const AlgoRequest&);
+    AlgoRequest operator=(const AlgoRequest&);
+
 public:
     AlgoRequest(double price, double quantity, const Side& side, const std::string& symbol);
     ~AlgoRequest() override;
+};
 
+/**
+ * Provides an interface for algo orders. This will be used for demoing manual order flow where traders
+ * enter their requests via a command line interface.
+ */
+class ManualRequest : public Request
+{
 private:
-    // Prevent copies from being made of this request
-    AlgoRequest(const AlgoRequest&);
-    AlgoRequest operator=(const AlgoRequest&);
+    // Prevent unintentional or intentional copies and clones of this request
+    ManualRequest(const ManualRequest&);
+    ManualRequest& operator=(const ManualRequest&);
+
+public:
+    ManualRequest(double price, double quantity, const Side& side, const std::string& symbol);
+    ~ManualRequest() override;
 };
 
 #endif //EXCHANGEMATCHINGENGINE_REQUEST_HPP

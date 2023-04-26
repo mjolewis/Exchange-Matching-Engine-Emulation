@@ -3,12 +3,14 @@
 //
 
 #include <iostream>
+
+#include "sstream"
 #include <vector>
 
 #include "UserProxyEngine.hpp"
 #include "../Common/Messages/ExchangeOptions.hpp"
 
-UserProxyEngine::UserProxyEngine(std::vector<std::string>& orderBook, Server* server)
+UserProxyEngine::UserProxyEngine(std::vector<Request*>& orderBook, Server* server)
 : orderBook(orderBook), server(server)
 {
     this->exchangeOpen = true;
@@ -23,6 +25,31 @@ void UserProxyEngine::startEngine() const
         int request = listenForRequest();
         validateRequest(request);
     }
+}
+
+void UserProxyEngine::printMarketStats() const
+{
+    int bids = 0;
+    int offers = 0;
+
+    double bestBid = __DBL_MIN__;
+    double bestOffer = __DBL_MAX__;
+    for (Request *request : this->orderBook)
+    {
+        if (&request->getSide() == (Side::BID) || request->getSide().getDesc() == "Bid")
+        {
+            ++bids;
+            if (request->getPrice() > bestBid) bestBid = request->getPrice();
+        }
+        if (&request->getSide() == (Side::OFFER) || request->getSide().getDesc() == "Offer")
+        {
+            ++offers;
+            if (request->getPrice() < bestOffer) bestOffer = request->getPrice();
+        }
+    }
+
+    std::cout << "Total Bids=" << bids << ", Best Bid=" << bestBid << "\n"
+              << "Total Offers= " << offers << ", Best Offer=" << bestOffer << "\n" << std::endl;
 }
 
 void UserProxyEngine::printMenu()
@@ -44,7 +71,7 @@ int UserProxyEngine::listenForRequest()
     return request;
 }
 
-bool UserProxyEngine::validateRequest(int request)
+bool UserProxyEngine::validateRequest(int request) const
 {
     bool isValidRequest = true;
     switch (request)
@@ -78,11 +105,6 @@ bool UserProxyEngine::validateRequest(int request)
 void UserProxyEngine::printHelp()
 {
     std::cout << "You're goal is to make money. Analyze the bids and offers." << std::endl;
-}
-
-void UserProxyEngine::printMarketStats()
-{
-    std::cout << "Stats placeholder" << std::endl;
 }
 
 void UserProxyEngine::submitOffer()
