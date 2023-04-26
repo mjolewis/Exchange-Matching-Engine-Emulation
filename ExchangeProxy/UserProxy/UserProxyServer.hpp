@@ -8,13 +8,13 @@
 #include <string>
 #include <vector>
 
-#include "UserProxyEngine.hpp"
 #include "../Common/Servers/Server.hpp"
+#include "../Common//Messages/Request.hpp"
 
 class UserProxyServer : public Server
 {
 private:
-    std::vector<std::string> orderBook;
+    std::vector<Request*> orderBook;
 
     // Avoid unintentional or intentional copies and clones of the Exchange
     UserProxyServer(const UserProxyServer&);

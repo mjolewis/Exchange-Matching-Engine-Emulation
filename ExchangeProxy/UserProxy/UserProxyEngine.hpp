@@ -9,11 +9,12 @@
 #include <vector>
 
 #include "../Common/Servers/Server.hpp"
+#include "../Common//Messages/Request.hpp"
 
 class UserProxyEngine
 {
 private:
-    std::vector<std::string> orderBook;
+    std::vector<Request*> orderBook;
     Server* server;
     bool exchangeOpen;
 
@@ -22,19 +23,19 @@ private:
     UserProxyEngine& operator=(const UserProxyEngine&);
 
     void startEngine() const;
+    void printMarketStats() const;
     static void printMenu();
     static int listenForRequest();
     static void printHelp();
-    static void printMarketStats();
     static void submitOffer();
     static void submitBid();
     static void printWallet();
     static void goToNextTimeframe();
-    static bool validateRequest(int request);
+    bool validateRequest(int request) const;
     static void onSubmitRequest(int request);
 
 public:
-    UserProxyEngine(std::vector<std::string>& orderBook, Server* server);
+    UserProxyEngine(std::vector<Request*>& orderBook, Server* server);
     ~UserProxyEngine() = default;
 };
 

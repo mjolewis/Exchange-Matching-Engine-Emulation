@@ -26,9 +26,9 @@ public:
 
     virtual ~AbstractCodes() = default;
 
-    virtual std::string getDesc() const {return this->desc;}
+    inline virtual std::string getDesc() const {return this->desc;}
 
-    virtual constexpr explicit operator int() const {return id;}
+    inline virtual constexpr explicit operator int() const {return id;}
 };
 
 #endif //EXCHANGEMATCHINGENGINE_ABSTRACTCODES_HPP
